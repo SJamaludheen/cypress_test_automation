@@ -1,4 +1,4 @@
-import { faker } from "@faker-js/faker";
+import { generateUserData, generateContactData, validateContactTable } from "../support/utils";
 
 describe('Contact List App', () => {
     let user;
@@ -117,38 +117,11 @@ describe('Contact List App', () => {
         cy.get("#submit").click();
     }
 
-    function generateUserData() {
-        const firstName = faker.person.firstName();
-        const lastName = faker.person.lastName();
-        return {
-            firstName: firstName,
-            lastName: lastName,
-            email: `${firstName}.${lastName}@example.com`,
-            password: "Sugar123Bravo$",
-        }
-    }
-
     function fillUserRegistrationForm(user) {
         cy.get("#firstName").type(user.firstName);
         cy.get("#lastName").type(user.lastName);
         cy.get("#email").type(user.email);
         cy.get("#password").type(user.password);
-    }
-
-    function generateContactData() {
-        const contactFirstName = faker.person.firstName();
-        const contactLastName = faker.person.lastName();
-        return {
-            contactFirstName: contactFirstName,
-            contactLastName: contactLastName,
-            contactEmail: `${contactFirstName}.${contactLastName}@example.com`,
-            contactPhone: faker.phone.number({ style: 'international' }),
-            contactBirthDate: faker.date.birthdate().toISOString().slice(0, 10).replace(/-/g, '-'),
-            contactStreetAddress: faker.location.streetAddress(),
-            contactPostalCode: faker.location.zipCode(),
-            contactCity: faker.location.city(),
-            contactCountry: faker.location.country(),
-        }
     }
 
     function fillContactForm(contact) {
